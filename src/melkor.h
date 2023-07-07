@@ -3,6 +3,25 @@
 #include <string.h>
 #include <elf.h>
 
+#ifdef __OpenBSD__
+typedef uint16_t Elf32_Section;
+typedef uint16_t Elf64_Section;
+
+#define ET_LOOS 0xfe00 /* First operating system specific. */
+#define ET_HIOS 0xfeff /* Last operating system specific. */
+
+#define PT_NUM 8 /* Number of defined types */
+
+#define STB_LOOS 10 /* Start operating system specific. */
+#define STB_HIOS 12 /* Last operating system specific. */
+
+#define STT_LOOS 10 /* Start operating system specific. */
+#define STT_HIOS 12 /* Last operating system specific. */
+
+#define DT_NUM 38 /* Number of defined types. */
+#include <sys/param.h> /* For PAGE_SIZE */
+#endif
+
 #define VERSION "v1.0"
 
 #define SWAP32(v) ((((v) & 0x000000ff) << 24) | \
@@ -137,7 +156,9 @@ int PAGESIZE; // Set at runtime with getpagesize() in melkor.c
 #define ELF_ST_TYPE ELF64_ST_TYPE
 #define ELF_ST_BIND ELF64_ST_BIND
 #define ELF_ST_INFO ELF64_ST_INFO
+#ifndef ELF_ST_VISIBILITY
 #define ELF_ST_VISIBILITY ELF64_ST_VISIBILITY
+#endif
 #define ELF_R_TYPE ELF64_R_TYPE
 #define ELF_R_SYM ELF64_R_SYM
 #define ELF_R_INFO ELF64_R_INFO
