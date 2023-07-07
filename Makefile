@@ -5,8 +5,8 @@
 # Mexico
 #
 
-CC = gcc
-CFLAGS = -ggdb -Wall -DDEBUG
+CC ?= gcc
+CFLAGS ?= -ggdb -Wall -DDEBUG
 INSTALLPATH = /usr/local/bin/
 SRC = src
 TEMPL_SRC = templates
@@ -37,7 +37,7 @@ templ:
 	$(CC) $(CFLAGS) $(TEMPLLIBFOO) -c -fPIC -o $(TEMPL_SRC)/libfoo.o
 	$(CC) $(CFLAGS) $(TEMPL_SRC)/libfoo.o -shared -o $(TEMPL_SRC)/libfoo.so
 	$(CC) $(CFLAGS) $(TEMPLFOOLIBFOO) -L $(TEMPL_SRC) -lfoo -o $(TEMPL_SRC)/foo_libfoo
-	$(CC) $(CFLAGS) $(TEMPLFOODL1) -ldl -o $(TEMPL_SRC)/foo_dlopen
+	$(CC) $(CFLAGS) $(TEMPLFOODL1) -o $(TEMPL_SRC)/foo_dlopen
 	$(CC) $(CFLAGS) $(TEMPLFOODL2) -L $(TEMPL_SRC) -lfoo -o $(TEMPL_SRC)/foo_dl_iterate_phdr
 
 envtools:
@@ -49,8 +49,6 @@ envtools:
 install:
 	install $(OUTPUT) $(INSTALLPATH)
 clean:
-	find  $(SRC) -type f -executable -exec rm {} \;
-	find  $(TEMPL_SRC) -type f -executable -exec rm {} \;
 	rm -f $(TEMPL_SRC)/*.o
 	rm -f $(TEMPL_SRC)/*.so
 	rm -f $(SRC)/*.o
