@@ -111,7 +111,7 @@ int hdr5(void)
 	else
 		orcHDR->e_entry = 0;
 
-	fprintf(logfp, "(HDR->e_entry = 0x"HEX")", orcHDR->e_entry);
+	fprintf(logfp, "(HDR->e_entry = 0x%llx)", orcHDR->e_entry);
 
 	return 1;
 }
@@ -122,7 +122,7 @@ int hdr6(void)
 		return 0;
 
 	orcHDR->e_phoff = getElf_Off();
-	fprintf(logfp, "(HDR->e_phoff = 0x"HEX")", orcHDR->e_phoff);
+	fprintf(logfp, "(HDR->e_phoff = 0x%llx)", orcHDR->e_phoff);
 
 	return 1;
 }
@@ -242,7 +242,7 @@ int hdr14(void)
 	orcHDR->e_shnum     = getElf_Half();
 	orcHDR->e_shentsize = getElf_Half();
 
-	fprintf(logfp, "(HDR->e_shoff = 0x"HEX",", orcHDR->e_shoff);
+	fprintf(logfp, "(HDR->e_shoff = 0x%llx,", orcHDR->e_shoff);
 	fprintf(logfp, " e_shnum = 0x%x,", orcHDR->e_shnum);
 	fprintf(logfp, " e_shentsize = 0x%x)", orcHDR->e_shentsize);
 

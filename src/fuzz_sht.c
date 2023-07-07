@@ -95,7 +95,7 @@ int sht2(void)
 
 	orcSHT->sh_addr = getElf_Addr();
 
-	fprintf(logfp, "(SHT[%d]->sh_addr = 0x"HEX")", sh, orcSHT->sh_addr);
+	fprintf(logfp, "(SHT[%d]->sh_addr = 0x%llx)", sh, orcSHT->sh_addr);
 
 	return 1;
 }
@@ -133,7 +133,7 @@ int sht3(void)
 
 	orcSHT->sh_offset = getElf_Off();
 
-	fprintf(logfp, "(SHT[%d]->sh_offset = 0x"HEX")", sh, orcSHT->sh_offset);
+	fprintf(logfp, "(SHT[%d]->sh_offset = 0x%llx)", sh, orcSHT->sh_offset);
 
 	return 1;
 }
@@ -176,7 +176,7 @@ int sht4(void)
 
 	fuzzSize();
 
-	fprintf(logfp, "(SHT[%d]->sh_size = 0x"HEX")", sh, orcSHT->sh_size);
+	fprintf(logfp, "(SHT[%d]->sh_size = 0x%llx)", sh, orcSHT->sh_size);
 
 	return 1;
 }
@@ -185,7 +185,7 @@ int sht5(void)
 {
 	fuzzAddrAlign();
 
-	fprintf(logfp, "(SHT[%d]->sh_addralign = 0x"HEX")", sh, orcSHT->sh_addralign);
+	fprintf(logfp, "(SHT[%d]->sh_addralign = 0x%llx)", sh, orcSHT->sh_addralign);
 
 	return 1;
 }
@@ -218,7 +218,7 @@ int sht6(void)
 
 	fuzzEntSize();
 
-	fprintf(logfp, "(SHT[%d]->sh_entsize = 0x"HEX")", sh, orcSHT->sh_entsize);
+	fprintf(logfp, "(SHT[%d]->sh_entsize = 0x%llx)", sh, orcSHT->sh_entsize);
 
 	return 1;
 }
@@ -355,9 +355,9 @@ int sht9(void)
 	orcSHT->sh_offset = getElf_Off();
 
 	fprintf(logfp, "(SHT[%d]->sh_name = 0x%x,", sh, orcSHT->sh_name);
-	fprintf(logfp, " sh_offset = 0x"HEX",", orcSHT->sh_offset);
-	fprintf(logfp, " sh_size = 0x"HEX",", orcSHT->sh_size);
-	fprintf(logfp, " sh_entsize = 0x"HEX")", orcSHT->sh_entsize);
+	fprintf(logfp, " sh_offset = 0x%llx,", orcSHT->sh_offset);
+	fprintf(logfp, " sh_size = 0x%llx,", orcSHT->sh_size);
+	fprintf(logfp, " sh_entsize = 0x%llx)", orcSHT->sh_entsize);
 
 	return 1;
 }
@@ -366,7 +366,7 @@ int sht10(void)
 {
 	fuzzFlags();
 
-	fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX")", sh, orcSHT->sh_flags);
+	fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx)", sh, orcSHT->sh_flags);
 
 	return 1;
 }
@@ -512,8 +512,8 @@ int sht14(void)
 	fuzzFlags();
 	fuzzSize();
 
-	fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX",", sh, orcSHT->sh_flags);
-	fprintf(logfp, " sh_size = 0x"HEX")", orcSHT->sh_size);
+	fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx,", sh, orcSHT->sh_flags);
+	fprintf(logfp, " sh_size = 0x%llx)", orcSHT->sh_size);
 
 	return 1;
 }
@@ -573,8 +573,8 @@ int sht15(void)
 	fuzzSize();
 
 	fprintf(logfp, "(SHT[%d]->sh_type = 0x%x,", sh, orcSHT->sh_type);
-	fprintf(logfp, " sh_size = 0x"HEX",", orcSHT->sh_size);
-	fprintf(logfp, " sh_flags = 0x"HEX")", orcSHT->sh_flags);
+	fprintf(logfp, " sh_size = 0x%llx,", orcSHT->sh_size);
+	fprintf(logfp, " sh_flags = 0x%llx)", orcSHT->sh_flags);
 
 	return 1;
 }
@@ -590,10 +590,10 @@ int sht16(void)
 	fuzzFlags();
 	fuzzAddrAlign();
 
-	fprintf(logfp, "(SHT[%d]->sh_size = 0x"HEX",", sh, orcSHT->sh_size);
-	fprintf(logfp, " sh_flags = 0x"HEX",", orcSHT->sh_flags);
-	fprintf(logfp, " sh_entsize = 0x"HEX",", orcSHT->sh_entsize);
-	fprintf(logfp, " sh_addralign = 0x"HEX")", orcSHT->sh_addralign);
+	fprintf(logfp, "(SHT[%d]->sh_size = 0x%llx,", sh, orcSHT->sh_size);
+	fprintf(logfp, " sh_flags = 0x%llx,", orcSHT->sh_flags);
+	fprintf(logfp, " sh_entsize = 0x%llx,", orcSHT->sh_entsize);
+	fprintf(logfp, " sh_addralign = 0x%llx)", orcSHT->sh_addralign);
 
 	return 1;
 }
@@ -657,9 +657,9 @@ int sht17(void)
 	fuzzEntSize();
 
 	fprintf(logfp, "(SHT[%d]->sh_type = 0x%x,", sh, orcSHT->sh_type);
-	fprintf(logfp, " sh_flags = 0x"HEX",", orcSHT->sh_flags);
-	fprintf(logfp, " sh_size = 0x"HEX",", orcSHT->sh_size);
-	fprintf(logfp, " sh_entsize = 0x"HEX")", orcSHT->sh_entsize);
+	fprintf(logfp, " sh_flags = 0x%llx,", orcSHT->sh_flags);
+	fprintf(logfp, " sh_size = 0x%llx,", orcSHT->sh_size);
+	fprintf(logfp, " sh_entsize = 0x%llx)", orcSHT->sh_entsize);
 
 	return 1;
 }
@@ -672,7 +672,7 @@ int sht18(void)
 	orcSHT->sh_flags &= ~SHF_ALLOC;
 	orcSHT->sh_flags &= ~SHF_WRITE;
 
-	fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX")", sh, orcSHT->sh_flags);
+	fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx)", sh, orcSHT->sh_flags);
 
 	return 1;
 }
@@ -733,9 +733,9 @@ int sht19(void)
 	fuzzEntSize();
 
 	fprintf(logfp, "(SHT[%d]->sh_type = 0x%x,", sh, orcSHT->sh_type);
-	fprintf(logfp, " sh_flags = 0x"HEX",", orcSHT->sh_flags);
-	fprintf(logfp, " sh_size = 0x"HEX",", orcSHT->sh_size);
-	fprintf(logfp, " sh_entsize = 0x"HEX")", orcSHT->sh_entsize);
+	fprintf(logfp, " sh_flags = 0x%llx,", orcSHT->sh_flags);
+	fprintf(logfp, " sh_size = 0x%llx,", orcSHT->sh_size);
+	fprintf(logfp, " sh_entsize = 0x%llx)", orcSHT->sh_entsize);
 
 	return 1;
 }
@@ -776,10 +776,10 @@ int sht20(void)
 	fuzzEntSize();
 	fuzzAddrAlign();
 
-	fprintf(logfp, "(SHT[%d]->sh_size = 0x"HEX",", sh, orcSHT->sh_size);
-	fprintf(logfp, " sh_flags = 0x"HEX",", orcSHT->sh_flags);
-	fprintf(logfp, " sh_entsize = 0x"HEX",", orcSHT->sh_entsize);
-	fprintf(logfp, " sh_addralign = 0x"HEX")", orcSHT->sh_addralign);
+	fprintf(logfp, "(SHT[%d]->sh_size = 0x%llx,", sh, orcSHT->sh_size);
+	fprintf(logfp, " sh_flags = 0x%llx,", orcSHT->sh_flags);
+	fprintf(logfp, " sh_entsize = 0x%llx,", orcSHT->sh_entsize);
+	fprintf(logfp, " sh_addralign = 0x%llx)", orcSHT->sh_addralign);
 
 	return 1;
 }
@@ -798,10 +798,10 @@ int sht21(void)
 	fuzzEntSize();
 	fuzzAddrAlign();
 
-	fprintf(logfp, "(SHT[%d]->sh_size = 0x"HEX",", sh, orcSHT->sh_size);
-	fprintf(logfp, " sh_flags = 0x"HEX",", orcSHT->sh_flags);
-	fprintf(logfp, " sh_entsize = 0x"HEX",", orcSHT->sh_entsize);
-	fprintf(logfp, " sh_addralign = 0x"HEX")", orcSHT->sh_addralign);
+	fprintf(logfp, "(SHT[%d]->sh_size = 0x%llx,", sh, orcSHT->sh_size);
+	fprintf(logfp, " sh_flags = 0x%llx,", orcSHT->sh_flags);
+	fprintf(logfp, " sh_entsize = 0x%llx,", orcSHT->sh_entsize);
+	fprintf(logfp, " sh_addralign = 0x%llx)", orcSHT->sh_addralign);
 
 	return 1;
 }
@@ -821,10 +821,10 @@ int sht22(void)
 	fuzzEntSize();
 	fuzzAddrAlign();
 
-	fprintf(logfp, "(SHT[%d]->sh_size = 0x"HEX",", sh, orcSHT->sh_size);
-	fprintf(logfp, " sh_flags = 0x"HEX",", orcSHT->sh_flags);
-	fprintf(logfp, " sh_entsize = 0x"HEX",", orcSHT->sh_entsize);
-	fprintf(logfp, " sh_addralign = 0x"HEX")", orcSHT->sh_addralign);
+	fprintf(logfp, "(SHT[%d]->sh_size = 0x%llx,", sh, orcSHT->sh_size);
+	fprintf(logfp, " sh_flags = 0x%llx,", orcSHT->sh_flags);
+	fprintf(logfp, " sh_entsize = 0x%llx,", orcSHT->sh_entsize);
+	fprintf(logfp, " sh_addralign = 0x%llx)", orcSHT->sh_addralign);
 
 	return 1;
 }
@@ -895,7 +895,7 @@ int sht23(void)
 		orcSHT->sh_flags = 0x00;
 
 	fprintf(logfp, "(SHT[%d]->sh_type = 0x%x,", sh, orcSHT->sh_type);
-	fprintf(logfp, " sh_flags = 0x"HEX")", orcSHT->sh_flags);
+	fprintf(logfp, " sh_flags = 0x%llx)", orcSHT->sh_flags);
 
 	return 1;
 }
@@ -963,7 +963,7 @@ int sht24(void)
 		orcSHT->sh_flags = 0x00;
 
 	fprintf(logfp, "(SHT[%d]->sh_type = 0x%x,", sh, orcSHT->sh_type);
-	fprintf(logfp, " sh_flags = 0x"HEX")", orcSHT->sh_flags);
+	fprintf(logfp, " sh_flags = 0x%llx)", orcSHT->sh_flags);
 
 	return 1;
 }
@@ -994,7 +994,7 @@ int sht25(void)
 	*(orcptr + elfSHT[interp].sh_offset + strlen(dirname_orcfname)) = '\0';
 
 	fprintf(logfp, "(SHT[%d]->sh_type = 0x%x,", sh, orcSHT->sh_type);
-	fprintf(logfp, " sh_flags = 0x"HEX",", orcSHT->sh_flags);
+	fprintf(logfp, " sh_flags = 0x%llx,", orcSHT->sh_flags);
 	fprintf(logfp, " .interp = %s)", orcptr + elfSHT[interp].sh_offset);
 
 	return 1;
@@ -1012,7 +1012,7 @@ int sht26(void)
 
 	orcSHT->sh_flags &= ~SHF_WRITE;
 
-	fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX")", sh, orcSHT->sh_flags);
+	fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx)", sh, orcSHT->sh_flags);
 
 	return 1;
 }
@@ -1030,7 +1030,7 @@ int sht27(void)
 	if(rand() % 4 < 3){ // 75% chance
 		orcSHT->sh_flags &= ~SHF_EXECINSTR;
 
-		fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX")", sh, orcSHT->sh_flags);
+		fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx)", sh, orcSHT->sh_flags);
 
 		return 1;
 	} else { // Binary patch: the second jmp instruction in the PLT
@@ -1097,8 +1097,8 @@ int sht28(void)
 		orcSHT->sh_size = 0;
 	}
 
-	fprintf(logfp, "(SHT[%d]->sh_offset = 0x"HEX",", sh, orcSHT->sh_offset);
-	fprintf(logfp, " sh_size = 0x"HEX")", orcSHT->sh_size);
+	fprintf(logfp, "(SHT[%d]->sh_offset = 0x%llx,", sh, orcSHT->sh_offset);
+	fprintf(logfp, " sh_size = 0x%llx)", orcSHT->sh_size);
 
 	return 1;
 }
@@ -1243,7 +1243,7 @@ int sht32(void)
 {
 	orcSHT->sh_flags |= SHF_MASKOS;
 
-	fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX")", sh, orcSHT->sh_flags);
+	fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx)", sh, orcSHT->sh_flags);
 
 	return 1;
 }
@@ -1316,7 +1316,7 @@ int sht34(void)
 	if(!fuzzed)
 		return 0;
 
-	fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX")", sh, orcSHT->sh_flags);
+	fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx)", sh, orcSHT->sh_flags);
 
 	return 1;
 }
@@ -1357,7 +1357,7 @@ int sht35(void)
 
 	memcpy(orcptr + elfSHT[sh].sh_offset, &addr, sizeof(addr));
 
-	fprintf(logfp, "(SHT[%d]->(sh_offset + 0) = 0x"HEX")", sh, addr);
+	fprintf(logfp, "(SHT[%d]->(sh_offset + 0) = 0x%llx)", sh, addr);
 
 	return 1;
 }
@@ -1401,8 +1401,8 @@ int sht36(void)
 	orcSHT->sh_size++;
 	orcSHT->sh_entsize--;
 
-	fprintf(logfp, "(SHT[%d]->sh_size = 0x"HEX",", sh, orcSHT->sh_size);
-	fprintf(logfp, " sh_entsize = 0x"HEX")", orcSHT->sh_entsize);
+	fprintf(logfp, "(SHT[%d]->sh_size = 0x%llx,", sh, orcSHT->sh_size);
+	fprintf(logfp, " sh_entsize = 0x%llx)", orcSHT->sh_entsize);
 
 	return 1;
 }
@@ -1437,12 +1437,12 @@ int sht37(void)
 		return 0;
 
 	if(tbss && tdata){
-		fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX",", tdata, orcOrigSHT[tdata].sh_flags);
-		fprintf(logfp, " SHT[%d]->sh_flags = 0x"HEX")", tbss, orcOrigSHT[tbss].sh_flags);
+		fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx,", tdata, orcOrigSHT[tdata].sh_flags);
+		fprintf(logfp, " SHT[%d]->sh_flags = 0x%llx)", tbss, orcOrigSHT[tbss].sh_flags);
 	} else if(tbss)
-		fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX")", tbss, orcOrigSHT[tbss].sh_flags);
+		fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx)", tbss, orcOrigSHT[tbss].sh_flags);
 	else
-		fprintf(logfp, "(SHT[%d]->sh_flags = 0x"HEX")", tdata, orcOrigSHT[tdata].sh_flags);
+		fprintf(logfp, "(SHT[%d]->sh_flags = 0x%llx)", tdata, orcOrigSHT[tdata].sh_flags);
 
 	return 1;
 }
@@ -1561,9 +1561,9 @@ void fuzzAddrAlign()
 				break;
 	} else {
 		if(rand() % 2) // 25%
-			orcSHT->sh_addralign = PAGESIZE - 1;
+			orcSHT->sh_addralign = PAGE_SIZE - 1;
 		else // 25%
-			orcSHT->sh_addralign = PAGESIZE + 1;
+			orcSHT->sh_addralign = PAGE_SIZE + 1;
 	}
 }
 

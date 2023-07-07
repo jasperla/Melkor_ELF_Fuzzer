@@ -118,17 +118,17 @@ int pht2(void)
 
 	if(rand() % 3 < 2){ // 66.66% chance
 		while((p_offset = getElf_Off()))
-			if(p_offset % PAGESIZE == 0)
+			if(p_offset % PAGE_SIZE == 0)
 				break;
 	} else {
 		while((p_offset = getElf_Off()))
-			if(p_offset % PAGESIZE != 0)
+			if(p_offset % PAGE_SIZE != 0)
 				break;
 	}
 
 	orcPHT->p_offset = p_offset;
 
-	fprintf(logfp, "(PHT[%d]->p_offset = 0x"HEX")", ph, orcPHT->p_offset);
+	fprintf(logfp, "(PHT[%d]->p_offset = 0x%llx)", ph, orcPHT->p_offset);
 
 	return 1;
 }
@@ -147,7 +147,7 @@ int pht3(void)
 		if(mode & NOTE)
 			return 0;
 
-	Elf_Addr v, p;
+	Elf_Addr v, p = 0;
 
 	if(rand() % 2){
 		if(rand() % 3 < 2){ // .5 * .6666 = 33.33% chance
@@ -160,7 +160,7 @@ int pht3(void)
 	} else {
 		if(rand() % 2){ // .5 * .5 = 25% chance
 			while((v = getElf_Addr()))
-				if(v % PAGESIZE == 0){
+				if(v % PAGE_SIZE == 0){
 					if(rand() % 2)
 						p = v;
 					else
@@ -169,7 +169,7 @@ int pht3(void)
 				}
 		} else { // 25% chance
 			while((v = getElf_Addr()))
-				if(v % PAGESIZE != 0){
+				if(v % PAGE_SIZE != 0){
 					if(rand() % 2)
 						p = v;
 					else
@@ -182,8 +182,8 @@ int pht3(void)
 	orcPHT->p_vaddr = v;
 	orcPHT->p_paddr = p;
 
-	fprintf(logfp, "(PHT[%d]->p_vaddr = 0x"HEX",", ph, orcPHT->p_vaddr);
-	fprintf(logfp, " p_paddr = 0x"HEX")", orcPHT->p_paddr);
+	fprintf(logfp, "(PHT[%d]->p_vaddr = 0x%llx,", ph, orcPHT->p_vaddr);
+	fprintf(logfp, " p_paddr = 0x%llx)", orcPHT->p_paddr);
 
 	return 1;
 }
@@ -216,7 +216,7 @@ int pht4(void)
 #elif defined(__x86_64__)
 		while((p_memsz = getElf_Xword()))
 #endif
-			if(p_memsz % PAGESIZE == 0){
+			if(p_memsz % PAGE_SIZE == 0){
 				orcPHT->p_memsz = p_memsz;
 				break;
 			}
@@ -235,8 +235,8 @@ int pht4(void)
 			orcPHT->p_memsz  = getElf_Word();
 	}
 
-	fprintf(logfp, "(PHT[%d]->p_filesz = 0x"HEX",", ph, orcPHT->p_filesz);
-	fprintf(logfp, " p_memsz = 0x"HEX")", orcPHT->p_memsz);
+	fprintf(logfp, "(PHT[%d]->p_filesz = 0x%llx,", ph, orcPHT->p_filesz);
+	fprintf(logfp, " p_memsz = 0x%llx)", orcPHT->p_memsz);
 
 	return 1;
 }
@@ -245,9 +245,9 @@ int pht5(void)
 {
 	if(rand() % 2){
 		if(rand() % 2)
-			orcPHT->p_align = PAGESIZE - 1;
+			orcPHT->p_align = PAGE_SIZE - 1;
 		else
-			orcPHT->p_align = PAGESIZE + 1;
+			orcPHT->p_align = PAGE_SIZE + 1;
 	} else
 #if defined(__i386__)
 		orcPHT->p_align = getElf_Word();
@@ -255,7 +255,7 @@ int pht5(void)
 		orcPHT->p_align = getElf_Xword();
 #endif
 
-	fprintf(logfp, "(PHT[%d]->p_align = 0x"HEX")", ph, orcPHT->p_align);
+	fprintf(logfp, "(PHT[%d]->p_align = 0x%llx)", ph, orcPHT->p_align);
 
 	return 1;
 }
@@ -326,7 +326,7 @@ int pht7(void)
 		orcPHT->p_filesz = getElf_Xword();
 #endif
 
-	fprintf(logfp, "(PHT[%d]->p_filesz = 0x"HEX")", ph, orcPHT->p_filesz);
+	fprintf(logfp, "(PHT[%d]->p_filesz = 0x%llx)", ph, orcPHT->p_filesz);
 
 	return 1;
 }
@@ -351,7 +351,7 @@ int pht8(void)
 
 	orcPHT->p_filesz = p_filesz;
 
-	fprintf(logfp, "(PHT[%d]->p_filesz = 0x"HEX")", ph, orcPHT->p_filesz);
+	fprintf(logfp, "(PHT[%d]->p_filesz = 0x%llx)", ph, orcPHT->p_filesz);
 
 	return 1;
 }
@@ -471,8 +471,8 @@ int pht12(void)
 	orcPHT->p_offset = getElf_Off();
 	orcPHT->p_vaddr  = getElf_Addr();
 
-	fprintf(logfp, "(PHT[%d]->p_offset = 0x"HEX",", ph, orcPHT->p_offset);
-	fprintf(logfp, " p_vaddr = 0x"HEX")", orcPHT->p_vaddr);
+	fprintf(logfp, "(PHT[%d]->p_offset = 0x%llx,", ph, orcPHT->p_offset);
+	fprintf(logfp, " p_vaddr = 0x%llx)", orcPHT->p_vaddr);
 
 	return 1;
 }
@@ -552,12 +552,12 @@ int pht16(void)
 	orcPHT->p_align = getElf_Xword();
 #endif
 
-	fprintf(logfp, "(PHT[%d]->p_offset = 0x"HEX",", ph, orcPHT->p_offset);
-	fprintf(logfp, " p_vaddr = 0x"HEX",", orcPHT->p_vaddr);
-	fprintf(logfp, " p_filesz = 0x"HEX",", orcPHT->p_filesz);
-	fprintf(logfp, " p_memsz = 0x"HEX",", orcPHT->p_memsz);
+	fprintf(logfp, "(PHT[%d]->p_offset = 0x%llx,", ph, orcPHT->p_offset);
+	fprintf(logfp, " p_vaddr = 0x%llx,", orcPHT->p_vaddr);
+	fprintf(logfp, " p_filesz = 0x%llx,", orcPHT->p_filesz);
+	fprintf(logfp, " p_memsz = 0x%llx,", orcPHT->p_memsz);
 	fprintf(logfp, " p_flags = 0x%x,", orcPHT->p_flags);
-	fprintf(logfp, " p_align = 0x"HEX")", orcPHT->p_align);
+	fprintf(logfp, " p_align = 0x%llx)", orcPHT->p_align);
 
 	return 1;
 }
@@ -587,12 +587,12 @@ int pht17(void)
 	orcPHT->p_align = getElf_Xword();
 #endif
 
-	fprintf(logfp, "(PHT[%d]->p_offset = 0x"HEX",", ph, orcPHT->p_offset);
-	fprintf(logfp, " p_vaddr = 0x"HEX",", orcPHT->p_vaddr);
-	fprintf(logfp, " p_filesz = 0x"HEX",", orcPHT->p_filesz);
-	fprintf(logfp, " p_memsz = 0x"HEX",", orcPHT->p_memsz);
+	fprintf(logfp, "(PHT[%d]->p_offset = 0x%llx,", ph, orcPHT->p_offset);
+	fprintf(logfp, " p_vaddr = 0x%llx,", orcPHT->p_vaddr);
+	fprintf(logfp, " p_filesz = 0x%llx,", orcPHT->p_filesz);
+	fprintf(logfp, " p_memsz = 0x%llx,", orcPHT->p_memsz);
 	fprintf(logfp, " p_flags = 0x%x,", orcPHT->p_flags);
-	fprintf(logfp, " p_align = 0x"HEX")", orcPHT->p_align);
+	fprintf(logfp, " p_align = 0x%llx)", orcPHT->p_align);
 
 	return 1;
 }
@@ -622,12 +622,12 @@ int pht18(void)
 	orcPHT->p_align = getElf_Xword();
 #endif
 
-	fprintf(logfp, "(PHT[%d]->p_offset = 0x"HEX",", ph, orcPHT->p_offset);
-	fprintf(logfp, " p_vaddr = 0x"HEX",", orcPHT->p_vaddr);
-	fprintf(logfp, " p_filesz = 0x"HEX",", orcPHT->p_filesz);
-	fprintf(logfp, " p_memsz = 0x"HEX",", orcPHT->p_memsz);
+	fprintf(logfp, "(PHT[%d]->p_offset = 0x%llx,", ph, orcPHT->p_offset);
+	fprintf(logfp, " p_vaddr = 0x%llx,", orcPHT->p_vaddr);
+	fprintf(logfp, " p_filesz = 0x%llx,", orcPHT->p_filesz);
+	fprintf(logfp, " p_memsz = 0x%llx,", orcPHT->p_memsz);
 	fprintf(logfp, " p_flags = 0x%x,", orcPHT->p_flags);
-	fprintf(logfp, " p_align = 0x"HEX")", orcPHT->p_align);
+	fprintf(logfp, " p_align = 0x%llx)", orcPHT->p_align);
 
 	return 1;
 }
@@ -783,12 +783,12 @@ int pht22(void)
 		tmpPHT->p_align = getElf_Xword();
 #endif
 
-		fprintf(logfp, "(PHT[%d]->p_offset = 0x"HEX",", p, tmpPHT->p_offset);
-		fprintf(logfp, " p_vaddr = 0x"HEX",", tmpPHT->p_vaddr);
-		fprintf(logfp, " p_filesz = 0x"HEX",", tmpPHT->p_filesz);
-		fprintf(logfp, " p_memsz = 0x"HEX",", tmpPHT->p_memsz);
+		fprintf(logfp, "(PHT[%d]->p_offset = 0x%llx,", p, tmpPHT->p_offset);
+		fprintf(logfp, " p_vaddr = 0x%llx,", tmpPHT->p_vaddr);
+		fprintf(logfp, " p_filesz = 0x%llx,", tmpPHT->p_filesz);
+		fprintf(logfp, " p_memsz = 0x%llx,", tmpPHT->p_memsz);
 		fprintf(logfp, " p_flags = 0x%x,", tmpPHT->p_flags);
-		fprintf(logfp, " p_align = 0x"HEX")", tmpPHT->p_align);
+		fprintf(logfp, " p_align = 0x%llx)", tmpPHT->p_align);
 
 		return 1;
 	} else {

@@ -52,7 +52,7 @@ int dyn1(void)
 
 	orcDYN->d_un.d_val = rand() & 0x0fff; // 12-bit random offset
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -77,7 +77,7 @@ int dyn2(void)
 	else
 		orcDYN->d_un.d_val = 0x00;
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -101,7 +101,7 @@ int dyn3(void)
 	else
 		orcDYN->d_un.d_val = 0x00;
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -116,7 +116,7 @@ int dyn4(void)
 	else
 		return 0;
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -131,7 +131,7 @@ int dyn5(void)
 	if(rand() % 2)
 		orcDYN->d_un.d_ptr = getElf_Addr();
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -155,7 +155,7 @@ int dyn6(void)
 			orcDYN->d_un.d_ptr = get_d_ptr_by_d_tag(DT_INIT);
 	}
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -173,7 +173,7 @@ int dyn7(void)
 	else
 		orcDYN->d_tag = DT_TEXTREL;
 
-	fprintf(logfp, "(DYN[%d]->d_tag = 0x"HEX")", entry, orcDYN->d_tag);
+	fprintf(logfp, "(DYN[%d]->d_tag = 0x%llx)", entry, orcDYN->d_tag);
 
 	return 1;
 }
@@ -198,7 +198,7 @@ int dyn8(void)
 
 	orcDYN->d_un.d_val = d_val;
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -213,7 +213,7 @@ int dyn9(void)
 
 	orcDYN->d_tag = DT_BIND_NOW;
 
-	fprintf(logfp, "(DYN[%d]->d_tag = 0x"HEX")", entry, orcDYN->d_tag);
+	fprintf(logfp, "(DYN[%d]->d_tag = 0x%llx)", entry, orcDYN->d_tag);
 
 	return 1;
 }
@@ -272,7 +272,7 @@ int dyn11(void)
 	orcDYN->d_un.d_val = DT_REL;
 #endif
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -299,9 +299,9 @@ int dyn12(void)
 
 	d_ptr = (void *) orcptr + elfSHT[ndx].sh_offset; // Points back again to print the results
 
-	fprintf(logfp, "(DYN[%d]->(d_un.d_ptr + 0) = 0x"HEX",", entry, *d_ptr++);
-	fprintf(logfp, " (d_un.d_ptr + %d) = 0x"HEX",", (unsigned int) sizeof(Elf_Addr *), *d_ptr++);
-	fprintf(logfp, " (d_un.d_ptr + %d) = 0x"HEX")", (unsigned int) sizeof(Elf_Addr *), *d_ptr);
+	fprintf(logfp, "(DYN[%d]->(d_un.d_ptr + 0) = 0x%llx,", entry, *d_ptr++);
+	fprintf(logfp, " (d_un.d_ptr + %d) = 0x%llx,", (unsigned int) sizeof(Elf_Addr *), *d_ptr++);
+	fprintf(logfp, " (d_un.d_ptr + %d) = 0x%llx)", (unsigned int) sizeof(Elf_Addr *), *d_ptr);
 
 	return 1;
 }
@@ -333,7 +333,7 @@ int dyn13(void)
 
 	orcDYN->d_tag = d_tag;
 
-	fprintf(logfp, "(DYN[%d]->d_tag = 0x"HEX")", entry, orcDYN->d_tag);
+	fprintf(logfp, "(DYN[%d]->d_tag = 0x%llx)", entry, orcDYN->d_tag);
 
 	return 1;
 }
@@ -371,7 +371,7 @@ int dyn14(void)
 
 	orcDYN->d_tag = d_tag;
 
-	fprintf(logfp, "(DYN[%d]->d_tag = 0x"HEX")", entry, orcDYN->d_tag);
+	fprintf(logfp, "(DYN[%d]->d_tag = 0x%llx)", entry, orcDYN->d_tag);
 
 	return 1;
 }
@@ -403,7 +403,7 @@ int dyn15(void)
 
 	orcDYN->d_tag = d_tag;
 
-	fprintf(logfp, "(DYN[%d]->d_tag = 0x"HEX")", entry, orcDYN->d_tag);
+	fprintf(logfp, "(DYN[%d]->d_tag = 0x%llx)", entry, orcDYN->d_tag);
 
 	return 1;
 }
@@ -444,8 +444,8 @@ int dyn16(void)
 
 	d_ptr = (void *) orcptr + elfSHT[ndx].sh_offset; // Points back again to print the results
 
-	fprintf(logfp, "(DYN[%d]->(d_un.d_ptr + 0) = 0x"HEX",", entry, *d_ptr++);
-	fprintf(logfp, " (d_un.d_ptr + %d) = 0x"HEX")", (unsigned int) sizeof(Elf_Addr *), *d_ptr);
+	fprintf(logfp, "(DYN[%d]->(d_un.d_ptr + 0) = 0x%llx,", entry, *d_ptr++);
+	fprintf(logfp, " (d_un.d_ptr + %d) = 0x%llx)", (unsigned int) sizeof(Elf_Addr *), *d_ptr);
 
 	return 1;
 }
@@ -481,7 +481,7 @@ int dyn17(void)
 
 	orcDYN->d_un.d_val = d_val;
 
-	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x"HEX")", entry, orcDYN->d_un.d_val);
+	fprintf(logfp, "(DYN[%d]->d_un.d_val = 0x%llx)", entry, orcDYN->d_un.d_val);
 
 	return 1;
 }
@@ -519,7 +519,7 @@ int dyn18(void)
 		}
 	}
 
-	fprintf(logfp, "(DYN[%d]->d_tag = 0x"HEX")", entry, orcDYN->d_tag);
+	fprintf(logfp, "(DYN[%d]->d_tag = 0x%llx)", entry, orcDYN->d_tag);
 
 	return 1;
 }

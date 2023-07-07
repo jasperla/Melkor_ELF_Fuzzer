@@ -56,7 +56,7 @@ int rel1(void)
 	} else
 		return 0;
 
-	fprintf(logfp, "(REL[%d]->r_offset = 0x"HEX")", entry, orcSHT->sh_type == SHT_REL ? orcREL->r_offset : orcRELA->r_offset);
+	fprintf(logfp, "(REL[%d]->r_offset = 0x%llx)", entry, orcSHT->sh_type == SHT_REL ? orcREL->r_offset : orcRELA->r_offset);
 
 	return 1;
 }
@@ -93,7 +93,7 @@ int rel2(void)
 #endif
 	}
 
-	fprintf(logfp, "(REL[%d]->r_info = 0x"HEX")", entry, orcSHT->sh_type == SHT_REL ? orcREL->r_info : orcRELA->r_info);
+	fprintf(logfp, "(REL[%d]->r_info = 0x%llx)", entry, orcSHT->sh_type == SHT_REL ? orcREL->r_info : orcRELA->r_info);
 
 	return 1;
 }
@@ -121,7 +121,7 @@ int rel3(void)
 			orcRELA->r_addend = getElf_Xword();
 	}
 
-	fprintf(logfp, "(REL[%d]->r_addend = 0x"HEX")", entry, orcRELA->r_addend);
+	fprintf(logfp, "(REL[%d]->r_addend = 0x%llx)", entry, orcRELA->r_addend);
 
 	return 1;
 }

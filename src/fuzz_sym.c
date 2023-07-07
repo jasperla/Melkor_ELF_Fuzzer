@@ -68,8 +68,8 @@ int sym1(void)
 	else
 		orcSYM->st_name = rand() & 0xff;
 
-	fprintf(logfp, "(SYM[%d]->st_value = 0x"HEX",", entry, orcSYM->st_value);
-	fprintf(logfp, " st_size = 0x"HEX",", orcSYM->st_size);
+	fprintf(logfp, "(SYM[%d]->st_value = 0x%llx,", entry, orcSYM->st_value);
+	fprintf(logfp, " st_size = 0x%llx,", orcSYM->st_size);
 	fprintf(logfp, " st_info = 0x%x,", orcSYM->st_info);
 	fprintf(logfp, " st_other = 0x%x,", orcSYM->st_other);
 	fprintf(logfp, " st_shndx = 0x%x,", orcSYM->st_shndx);
@@ -107,7 +107,7 @@ int sym3(void)
 	else
 		orcSYM->st_value = getElf_Word();
 	
-	fprintf(logfp, "(SYM[%d]->st_value = 0x"HEX")", entry, orcSYM->st_value);
+	fprintf(logfp, "(SYM[%d]->st_value = 0x%llx)", entry, orcSYM->st_value);
 
 	return 1;
 }
@@ -123,7 +123,7 @@ int sym4(void)
 		orcSYM->st_size = getElf_Word();
 #endif
 
-	fprintf(logfp, "(SYM[%d]->st_size = 0x"HEX")", entry, orcSYM->st_size);
+	fprintf(logfp, "(SYM[%d]->st_size = 0x%llx)", entry, orcSYM->st_size);
 
 	return 1;
 }
@@ -222,7 +222,7 @@ int sym8(void)
 
 	orcSYM->st_value = st_value;
 
-	fprintf(logfp, "(SYM[%d]->st_value = 0x"HEX")", entry, orcSYM->st_value);
+	fprintf(logfp, "(SYM[%d]->st_value = 0x%llx)", entry, orcSYM->st_value);
 
 	return 1;
 }
@@ -238,7 +238,7 @@ int sym9(void)
 	else
 		orcSYM->st_value = getElf_Word();
 
-	fprintf(logfp, "(SYM[%d]->st_value = 0x"HEX")", entry, orcSYM->st_value);
+	fprintf(logfp, "(SYM[%d]->st_value = 0x%llx)", entry, orcSYM->st_value);
 
 	return 1;
 }
@@ -254,7 +254,7 @@ int sym10(void)
 
 	orcSYM->st_value = getElf_Addr();
 
-	fprintf(logfp, "(SYM[%d]->st_value = 0x"HEX")", entry, orcSYM->st_value);
+	fprintf(logfp, "(SYM[%d]->st_value = 0x%llx)", entry, orcSYM->st_value);
 
 	return 1;
 }
@@ -292,7 +292,7 @@ int sym12(void)
 
 	orcSYM->st_value = getElf_Addr();
 
-	fprintf(logfp, "(SYM[%d]->st_value = 0x"HEX")", entry, orcSYM->st_value);
+	fprintf(logfp, "(SYM[%d]->st_value = 0x%llx)", entry, orcSYM->st_value);
 
 	return 1;
 }

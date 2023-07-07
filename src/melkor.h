@@ -58,8 +58,6 @@ typedef uint16_t Elf64_Section;
 */
 typedef int (*func_ptr)(void);
 
-int PAGESIZE; // Set at runtime with getpagesize() in melkor.c
-
 #ifndef PT_GNU_STACK
 #define PT_GNU_STACK 0x6474e551 // Indicates executable stack
 #endif
@@ -140,6 +138,7 @@ int PAGESIZE; // Set at runtime with getpagesize() in melkor.c
 #define Elf_Sxword Elf64_Sxword
 #define Elf_Addr Elf64_Addr
 #define Elf_Off Elf64_Off
+
 #define Elf_Section Elf64_Section
 
 // Data Structs

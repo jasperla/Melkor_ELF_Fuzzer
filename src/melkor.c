@@ -301,7 +301,6 @@ int main(int argc, char **argv)
 	logfp = start_logger(logfname, elfname);
 
 	srand(getseed());
-	PAGESIZE = getpagesize();
 
 	for(orcn = 1; orcn <= n; orcn++){
 		snprintf(orcfname, sizeof(orcfname), "orc_%.4d%s", orcn, ext);
